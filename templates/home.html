@@ -30,10 +30,12 @@
                 <h5>
                   <strong>
                     <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
+                      
                     </a>
                   </strong>
                 </h5>
+
+                
 
                 <h4 class="font-weight-bold blue-text">
                   <strong>$
@@ -44,6 +46,11 @@
                   {% endif %}
                   </strong>
                 </h4>
+
+                
+                <a href="{{ item.get_absolute_url }}">
+                  <button style="font-size:12px" class="btn btn-success btn-sm">See More</button>
+                </a>
 
               </div>
 

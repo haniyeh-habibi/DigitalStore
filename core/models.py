@@ -68,17 +68,6 @@ class OrderItem(models.Model):
     def get_total_item_price(self):
         return self.quantity * self.item.price
 
-    # def get_total_discount_item_price(self):
-    #     return self.quantity * self.item.discount_price
-
-    # def get_amount_saved(self):
-    #     return self.get_total_item_price() - self.get_total_discount_item_price()
-
-    # def get_final_price(self):
-        # if self.item.discount_price:
-        #     return self.get_total_discount_item_price()
-        # return self.get_total_item_price()
-
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -94,8 +83,6 @@ class Order(models.Model):
         'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
-    refund_requested = models.BooleanField(default=False)
-    refund_granted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
@@ -131,16 +118,6 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-class Refund(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    reason = models.TextField()
-    accepted = models.BooleanField(default=False)
-    email = models.EmailField()
-
-    def __str__(self):
-        return f"{self.pk}"
 
 
 def userprofile_receiver(sender, instance, created, *args, **kwargs):
